@@ -4,19 +4,27 @@ import {MemberEntity} from '../../model/member'
 
 interface Props {
   members: Array<MemberEntity>;
-  loadMembers: () => any;
+  nameOrganization: string;
+  nameOrganization22: string;
+
+  loadMembers: (nameOrganization : string) => any;
+  onChangeNameOrganization: (nameOrganization: string) => void;
 }
 
 export const MemberAreaComponent = (props : Props) => {
   return (
   <div>
-      <MemberTableComponent members={props.members}/>
-      <br/>
+      <input type="text" 
+          value={props.nameOrganization} 
+          onChange={(e) => props.onChangeNameOrganization(e.target.value)}
+      />
       <input type="submit"
               value="load"
               className="btn btn-default"
-              onClick={() => props.loadMembers()}
+              onClick={() => props.loadMembers(props.nameOrganization)}
       />
+      <br/>
+      <MemberTableComponent members={props.members}/>
   </div>
   );
 }
